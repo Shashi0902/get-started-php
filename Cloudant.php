@@ -41,10 +41,10 @@ final class Cloudant {
 		#If running locally enter your own host, port, username and password
 
 
-		$host = getenv('CLOUDANT_HOST');
+		$host = getenv('056a9053-7fdf-47bb-85c8-79ebcc9f2bc2-bluemix.cloudantnosqldb.appdomain.cloud');
 		$port = '443';
-		$username = getenv('CLOUDANT_USERNAME');
-		$password = getenv('CLOUDANT_PASSWORD');
+		$username = getenv('056a9053-7fdf-47bb-85c8-79ebcc9f2bc2-bluemix');
+		$password = getenv('47906d1faa34ec8b448239b40250f166a854d924a0fc7827128eb6f54aa94993');
 		if($vcapStr = getenv('VCAP_SERVICES')) {
 			$vcap = json_decode($vcapStr, true);
 			foreach ($vcap as $serviceTypes) {
@@ -53,7 +53,7 @@ final class Cloudant {
 						$credentials = $service['credentials'];
 						$username = $credentials['username'];
 						$password = $credentials['password'];
-						$parsedUrl = parse_url($credentials['url']);
+						$parsedUrl = parse_url($credentials['056a9053-7fdf-47bb-85c8-79ebcc9f2bc2-bluemix:47906d1faa34ec8b448239b40250f166a854d924a0fc7827128eb6f54aa94993@056a9053-7fdf-47bb-85c8-79ebcc9f2bc2-bluemix.cloudantnosqldb.appdomain.cloud']);
 						$host = $parsedUrl['host'];
 						$port = isset($parsedUrl['port']) ?
 						$parsedUrl['port'] : $parsedUrl['scheme'] == 'http' ?
@@ -67,7 +67,7 @@ final class Cloudant {
 		$this->sag->useSSL(true);
 		$dbsession = $this->sag->login($username, $password);
 		try {
-			$this->sag->setDatabase('mydb', true);
+			$this->sag->setDatabase('guestbook-db', true);
 			$this->createView();
 			$this->db_exists = true;
 		} catch (Exception $e) {
